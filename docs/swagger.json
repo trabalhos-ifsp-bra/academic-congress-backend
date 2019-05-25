@@ -1,0 +1,213 @@
+{
+  "info": {
+    "title": "academic-congress-backend",
+    "version": "1.0.1",
+    "license": {
+      "name": "MIT"
+    },
+    "description": "[Specification JSON](/api-spec)\n\nProjeto para as disciplinas de QA e Metodologias Ageis do ifsp-bra 1sem 2019"
+  },
+  "paths": {
+    "/articles": {
+      "post": {
+        "summary": "/articles",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/{id}": {
+      "get": {
+        "summary": "/articles/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ]
+      },
+      "delete": {
+        "summary": "/articles/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/articles/all": {
+      "get": {
+        "summary": "/articles/all",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/all/accepted": {
+      "get": {
+        "summary": "/articles/all/accepted",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/all/refused": {
+      "get": {
+        "summary": "/articles/all/refused",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/all/pending": {
+      "get": {
+        "summary": "/articles/all/pending",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/all/anal": {
+      "get": {
+        "summary": "/articles/all/anal",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/talks": {
+      "post": {
+        "summary": "/talks",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/talks/{id}": {
+      "get": {
+        "summary": "/talks/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ]
+      },
+      "post": {
+        "summary": "/talks/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/talks/all": {
+      "get": {
+        "summary": "/talks/all",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "/users",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/users/user/{id}": {
+      "get": {
+        "summary": "/users/user/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/users/all": {
+      "get": {
+        "summary": "/users/all",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/users/update/{id}": {
+      "put": {
+        "summary": "/users/update/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/users/delete/{id}": {
+      "delete": {
+        "summary": "/users/delete/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/users/authenticate": {
+      "get": {
+        "summary": "/users/authenticate",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    }
+  },
+  "swagger": "2.0"
+}
