@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
-
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -21,9 +20,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 
-/**
-* Password hash middleware.
-*/
+// Password hash middleware.
 // eslint-disable-next-line consistent-return, func-names
 UserSchema.pre('save', function (callback) {
   if (!this.isModified('password')) {

@@ -27,7 +27,9 @@ router.post('/', async (req, res) => {
 
 router.get('/user/:id', async (req, res) => {
   try {
-    const user = await User.getUserById(req.params.id);
+    const { id } = req.params;
+    const user = await User.getUserById(id);
+
     return res.status(200).json(user);
   } catch (error) {
     return res.status(400).json({ message: error.message });
@@ -59,7 +61,7 @@ router.delete('/delete/:id', async (req, res) => {
   try {
     await User.removeUser(req.params.id);
 
-    return res.status(200).json({ ok: 'ok' });
+    return res.sendStatus(200);
   } catch (error) {
     return res.status(400).json(error);
   }

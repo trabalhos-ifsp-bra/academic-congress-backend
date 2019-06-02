@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const ArticleStatuses = require('../constants/ArticleStatuses.constants');
 
-const { ObjectId } = mongoose.Schema;
+const { ObjectId } = mongoose.Schema.Types;
 
 const ArticleSchema = mongoose.Schema({
   authors: [{
     fullname: {
       type: String,
-      requred: true,
+      required: true,
     },
     institution: {
       type: String,
@@ -24,12 +24,12 @@ const ArticleSchema = mongoose.Schema({
   },
   submeter: {
     type: ObjectId,
-    ref: 'User',
+    ref: 'users',
   },
-  keywords: [{
-    type: String,
-    required: () => this.keywords.length < 5,
-  }],
+  keywords: {
+    type: [String],
+    required: true,
+  },
   status: {
     type: String,
     enum: Object.values(ArticleStatuses),
@@ -38,7 +38,7 @@ const ArticleSchema = mongoose.Schema({
   evaluators: [{
     evaluator: {
       type: ObjectId,
-      ref: 'User',
+      ref: 'users',
     },
     accepted: {
       type: Boolean,
@@ -49,31 +49,12 @@ const ArticleSchema = mongoose.Schema({
     type: Buffer,
     required: true,
   },
+}, {
+  autoCreate: true,
 });
 
-ArticleSchema.pre('save', next => {
-  if (this.evaluators.length !== 2) {
-    return next();
-  }
-
-  const isAccepted = this.evaluators.every(evaluator => evaluator.accepted);
-  if (isAccepted) {
-    this.status = ArticleStatuses.accepted;
-  }
-
-  return next();
-});
-
-ArticleSchema.pre('save', next => {
-  if (this.evaluators.length !== 2) {
-    return next();
-  }
-  const isRefused = this.evaluators.every(evaluator => evaluator.refused);
-  if (isRefused) {
-    this.status = ArticleStatuses.refused;
-  }
-  return next();
-});
+ArticleSchema.path('keywords').validate(keylist => keylist.length >= 5,
+  'A list of 5 or more keyword are required.');
 
 const Article = mongoose.model('articles', ArticleSchema);
 

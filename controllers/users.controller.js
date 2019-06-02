@@ -1,4 +1,11 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/User.model');
+const { isValidEmail, isValidPassword } = require('../utils/validators');
+
+const encryptPassword = async password => {
+  const salt = await bcrypt.genSalt(10);
+  return bcrypt.hash(password, salt);
+};
 
 module.exports.getUserById = async userId => {
   try {
@@ -46,23 +53,40 @@ module.exports.createUser = async user => {
 
 module.exports.updateUser = async (id, user) => {
   try {
+    let { password } = user;
     const {
       username,
-      password,
       email,
       permission,
     } = user;
+    const updatedUser = await User.findById(id);
 
-    return await User.findByIdAndUpdate(id, {
-      username,
-      password,
-      email,
-      permission,
-    },
-    {
-      select: '-password',
-      omitUndefined: true,
-    });
+    if (!updatedUser) {
+      throw new Error({ message: `User ${id} not found.` });
+    }
+
+    if (password) {
+      if (!isValidPassword(password)) {
+        throw new Error({ message: 'Invalid email.' });
+      }
+
+      password = await encryptPassword(password);
+    }
+
+    if (email) {
+      if (!isValidEmail(email)) {
+        throw new Error({ message: 'Invalid email.' });
+      }
+    }
+
+    updatedUser.username = username || updatedUser.username;
+    updatedUser.email = email || updatedUser.email;
+    updatedUser.password = password || updatedUser.password;
+    updatedUser.permission = permission || updatedUser.permission;
+
+    await updatedUser.save();
+    delete updatedUser.password;
+    return updatedUser;
   } catch (error) {
     throw error;
   }
@@ -77,7 +101,6 @@ module.exports.removeUser = async userId => {
 };
 
 module.exports.login = async (email, password) => {
-  // validate both
   try {
     const message = 'Email ou senha inválidos.';
     const user = await User.findOne({ email });
