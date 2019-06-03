@@ -45,14 +45,6 @@ UserSchema.pre('save', function (callback) {
   });
 });
 
-/**
-* Helper method for validating user's password.
-*/
-// eslint-disable-next-line func-names
-UserSchema.methods.comparePassword = function (candidatePassword) {
-  return bcrypt.compare(candidatePassword, this.password);
-};
-
 const User = mongoose.model('users', UserSchema);
 
 module.exports = User;

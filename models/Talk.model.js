@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-const { ObjectId } = mongoose.Schema;
+const { ObjectId } = mongoose.Schema.Types;
 
 const TalkSchema = new mongoose.Schema({
-  dateTime: {
-    type: Date, required: true,
+  date: {
+    type: String,
+    required: true,
   },
   ordem: {
     type: Number,
@@ -16,6 +17,8 @@ const TalkSchema = new mongoose.Schema({
     type: ObjectId,
     ref: 'Article',
   },
+}, {
+  autoCreate: true,
 });
 
 

@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
 
     return res.status(201).json(newArticle);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error);
   }
 });
 
@@ -20,7 +20,7 @@ router.get('/article/:id', async (req, res) => {
 
     return res.status(200).json(article);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error);
   }
 });
 
@@ -30,7 +30,7 @@ router.get('/all', async (_, res) => {
 
     return res.status(200).json(allArticles);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error);
   }
 });
 
@@ -40,7 +40,7 @@ router.get('/all/accepted', async (_, res) => {
 
     return res.status(200).json(accepteds);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error);
   }
 });
 
@@ -50,7 +50,7 @@ router.get('/all/refused', async (_, res) => {
 
     return res.status(200).json(refuseds);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error);
   }
 });
 
@@ -60,7 +60,7 @@ router.get('/all/pending', async (_, res) => {
 
     return res.status(200).json(pending);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error);
   }
 });
 
@@ -70,7 +70,7 @@ router.get('/all/anal', async (_, res) => {
 
     return res.status(200).json(anals);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error);
   }
 });
 
@@ -84,7 +84,7 @@ router.patch('/evaluation/:id', async (req, res) => {
 
     return res.status(200).json(article);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error);
   }
 });
 

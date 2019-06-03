@@ -41,7 +41,7 @@ router.get('/all', async (req, res) => {
     const allUsers = await User.getAll();
     return res.status(200).json(allUsers);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error);
   }
 });
 
@@ -53,7 +53,7 @@ router.put('/update/:id', async (req, res) => {
 
     return res.status(200).json(updated);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    return res.status(400).json(error);
   }
 });
 

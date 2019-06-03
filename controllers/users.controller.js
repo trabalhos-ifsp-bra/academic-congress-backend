@@ -3,9 +3,12 @@ const User = require('../models/User.model');
 const { isValidEmail, isValidPassword } = require('../utils/validators');
 
 const encryptPassword = async password => {
-  const salt = await bcrypt.genSalt(10);
-  return bcrypt.hash(password, salt);
-};
+  bcrypt.genSalt(666, function (err, salt) {
+    bcrypt.hash(password, salt, function (error, hash) {
+      return hash;
+    });
+  });
+}
 
 module.exports.getUserById = async userId => {
   try {
@@ -59,15 +62,24 @@ module.exports.updateUser = async (id, user) => {
       email,
       permission,
     } = user;
+
     const updatedUser = await User.findById(id);
 
+    console.log('---------');
+    const foo = await encryptPassword('teste123');
+    const bar = await encryptPassword('teste123');
+    console.log('foo');
+    console.log(foo);
+    console.log('bar');
+    console.log(bar);
+
     if (!updatedUser) {
-      throw new Error({ message: `User ${id} not found.` });
+      throw { message: 'User not found.' };
     }
 
     if (password) {
       if (!isValidPassword(password)) {
-        throw new Error({ message: 'Invalid email.' });
+        throw { message: 'Invalid password.' };
       }
 
       password = await encryptPassword(password);
@@ -75,7 +87,7 @@ module.exports.updateUser = async (id, user) => {
 
     if (email) {
       if (!isValidEmail(email)) {
-        throw new Error({ message: 'Invalid email.' });
+          throw { message: 'Invalid email.' };
       }
     }
 
@@ -86,6 +98,7 @@ module.exports.updateUser = async (id, user) => {
 
     await updatedUser.save();
     delete updatedUser.password;
+
     return updatedUser;
   } catch (error) {
     throw error;
@@ -102,17 +115,20 @@ module.exports.removeUser = async userId => {
 
 module.exports.login = async (email, password) => {
   try {
-    const message = 'Email ou senha inválidos.';
     const user = await User.findOne({ email });
 
     if (!user) {
-      throw new Error(message);
+      console.log('111');
+      throw { message: 'Email ou senha inválidos.' };
     }
 
-    const isCorrect = await user.comparePassword(password);
+    const isCorrect = bcrypt.compare(password, user.password, (err, res) => res);
 
     if (!isCorrect) {
-      throw new Error(message);
+      console.log('118');
+      console.log(encryptedPassword);
+      console.log(user.password);
+      throw { message: 'Email ou senha inválidos.' };
     }
 
     return user;

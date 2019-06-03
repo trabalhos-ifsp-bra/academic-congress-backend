@@ -8,6 +8,138 @@
     "description": "[Specification JSON](/api-spec)\n\nProjeto para as disciplinas de QA e Metodologias Ageis do ifsp-bra 1sem 2019"
   },
   "paths": {
+    "/articles": {
+      "post": {
+        "summary": "/articles",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/article/{id}": {
+      "get": {
+        "summary": "/articles/article/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/articles/all": {
+      "get": {
+        "summary": "/articles/all",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/all/accepted": {
+      "get": {
+        "summary": "/articles/all/accepted",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/all/refused": {
+      "get": {
+        "summary": "/articles/all/refused",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/all/pending": {
+      "get": {
+        "summary": "/articles/all/pending",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/all/anal": {
+      "get": {
+        "summary": "/articles/all/anal",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/articles/evaluation/{id}": {
+      "patch": {
+        "summary": "/articles/evaluation/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/talks": {
+      "post": {
+        "summary": "/talks",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/talks/talk/{id}": {
+      "get": {
+        "summary": "/talks/talk/{id}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/talks/all": {
+      "get": {
+        "summary": "/talks/all",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": []
+      }
+    },
+    "/talks/all/{date}": {
+      "get": {
+        "summary": "/talks/all/{date}",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true
+          }
+        ]
+      }
+    },
     "/users": {
       "post": {
         "summary": "/users",
